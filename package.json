@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "board.js",
+  "type": "module",
   "directories": {
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "live-server --port=3000"
   },
   "repository": {
@@ -21,6 +22,10 @@
   },
   "homepage": "https://github.com/LukeGarrigan/p5js-chess#readme",
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.12.1",
     "jest": "^26.6.3"
+  },
+  "dependencies": {
+    "jest-cli": "^26.6.3"
   }
 }
