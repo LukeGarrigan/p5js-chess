@@ -1,7 +1,9 @@
-class Board {
+import {SIZE} from "./constants.js";
+
+export default class Board {
 
     constructor() {
-        this.sizeOfSquare = size / 8;
+        this.sizeOfSquare = SIZE / 8;
         this.tiles = this.createTiles();
     }
 
@@ -25,5 +27,4 @@ class Board {
             }
         }
     }
-    
 }

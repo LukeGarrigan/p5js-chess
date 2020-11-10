@@ -1,0 +1,26 @@
+{
+  "name": "chess",
+  "version": "1.0.0",
+  "description": "",
+  "main": "board.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "live-server --port=3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LukeGarrigan/p5js-chess.git"
+  },
+  "author": "lg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LukeGarrigan/p5js-chess/issues"
+  },
+  "homepage": "https://github.com/LukeGarrigan/p5js-chess#readme",
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
+}

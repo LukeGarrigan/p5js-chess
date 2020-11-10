@@ -1,13 +1,13 @@
-const size = 800;
+import Board from "./board.js"
+import {SIZE} from "./constants.js";
 let board;
-function setup() {
-    createCanvas(size, size);
+
+window.setup = () => {
+    createCanvas(SIZE, SIZE);
     board = new Board();
-
-
 }
 
-function draw() {
+window.draw = () => {
     background(220);
     board.draw();
 }
