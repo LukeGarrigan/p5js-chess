@@ -10,15 +10,16 @@ export default class Board {
 
 
     createTiles() {
+        let offset = this.sizeOfSquare/2;
         let tiles = [];
         for (let i = 0; i < 8; i++) {
             tiles[i] = [];
             for (let j = 0; j < 8; j++) {
 
                 if (j == 1 || j == 6) {
-                    tiles[i][j] = { x: j * this.sizeOfSquare, y: i * this.sizeOfSquare, piece: new Pawn() };
+                    tiles[i][j] = { x: i * this.sizeOfSquare + offset, y: j * this.sizeOfSquare + offset , piece: new Pawn() };
                 } else {
-                    tiles[i][j] = { x: j * this.sizeOfSquare, y: i * this.sizeOfSquare };
+                    tiles[i][j] = { x: i * this.sizeOfSquare + offset, y: j * this.sizeOfSquare + offset };
                 }
                 
             }
@@ -27,18 +28,17 @@ export default class Board {
     }
 
     draw() {
+        rectMode(CENTER);
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 8; j++) {
                 const currentTile = this.tiles[i][j];
                 
                 rect(currentTile.x, currentTile.y, this.sizeOfSquare, this.sizeOfSquare);
 
+
                 if (currentTile.piece && currentTile.piece.type == "pawn") {
-                    ellipseMode(CENTER);
                     ellipse(currentTile.x, currentTile.y, 40, 40);
                 }
-
-                
             }
         }
     }

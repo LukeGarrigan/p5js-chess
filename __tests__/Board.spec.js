@@ -1,6 +1,6 @@
 
 import Board from "../Board.js";
-import {SIZE} from "../constants.js";
+import { SIZE } from "../constants.js";
 
 describe('Creating the tiles', () => {
     let board;
@@ -8,22 +8,22 @@ describe('Creating the tiles', () => {
         board = new Board();
     })
     test("Should create tiles", () => {
-        
+
         expect(board.tiles.length).toBe(8);
         for (let i = 0; i < 8; i++) {
             expect(board.tiles[i].length).toBe(8);
         }
     });
-    
+
     test("Should create tiles", () => {
         const firstTile = board.tiles[0][0];
         const lastTile = board.tiles[7][7];
-    
-        expect(firstTile.x).toBe(0);
-        expect(firstTile.y).toBe(0);
-    
-        expect(lastTile.x).toBe((SIZE /  8) * 7);
-        expect(lastTile.y).toBe((SIZE /  8) * 7);
+
+        expect(firstTile.x).toBe(50);
+        expect(firstTile.y).toBe(50);
+
+        expect(lastTile.x).toBe((SIZE / 8) * 7 + 50);
+        expect(lastTile.y).toBe((SIZE / 8) * 7 + 50);
     });
 })
 
