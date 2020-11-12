@@ -1,23 +1,28 @@
-import { COLOUR } from "./constants";
+import { COLOUR } from "./constants.js";
 
 export default class Pawn {
-    constructor(x, y, colour, tiles) {
+    constructor(x, y, colour) {
         this.x = x;
         this.y = y;
-        this.type = "pawn";
         this.colour = colour;
-        this.tiles = tiles;
     }
 
 
-    findLegalMoves() {
+    findLegalMoves(tiles) {
+        let legalMoves = [];
+
         if (this.colour == COLOUR.BLACK) {
-            return [
-                {
-                    x: this.x,
-                    y: this.y + 1
-                }
-            ] 
+            const forwardMove = { x: this.x, y: this.y + 1}
+            if (!tiles[forwardMove.x][forwardMove.y].piece) {
+                legalMoves.push(forwardMove);
+            }
+        } else {
+            const forwardMove = { x: this.x, y: this.y - 1}
+            if (!tiles[forwardMove.x][forwardMove.y].piece) {
+                legalMoves.push(forwardMove);
+            }
         }
+
+        return legalMoves;
     }
 }

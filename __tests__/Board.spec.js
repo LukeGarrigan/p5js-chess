@@ -1,6 +1,7 @@
 
 import Board from "../Board.js";
 import { SIZE, COLOUR } from "../constants.js";
+import Pawn from "../Pawn.js";
 
 describe('Creating the tiles', () => {
     let board;
@@ -39,15 +40,14 @@ describe('Creating the pieces', () => {
     test('Should create black players pawns', () => {
         for (let i = 0; i < 8; i++) {
             const tileWithPawn = board.tiles[i][1];
-            expect(tileWithPawn.piece.type).toBe("pawn");
-            expect(tileWithPawn.piece.colour).toBe(COLOUR.BLACK);
+            expect(tileWithPawn.piece).toStrictEqual(new Pawn(i, 1, COLOUR.BLACK));
         }
     });
 
     test('Should create white players pawns', () => {
         for (let i = 0; i < 8; i++) {
-            const tileWithPawn = board.tiles[0][6];
-            expect(tileWithPawn.piece.type).toBe("pawn");
+            const tileWithPawn = board.tiles[i][6];
+            expect(tileWithPawn.piece).toStrictEqual(new Pawn(i, 6, COLOUR.WHITE));
         }
     });
 })
