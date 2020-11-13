@@ -13,12 +13,12 @@ export default class Pawn {
 
         if (this.colour == COLOUR.BLACK) {
             const forwardMove = { x: this.x, y: this.y + 1}
-            if (!tiles[forwardMove.x][forwardMove.y].piece) {
+            if (!tiles[forwardMove.x][forwardMove.y]) {
                 legalMoves.push(forwardMove);
             }
         } else {
             const forwardMove = { x: this.x, y: this.y - 1}
-            if (!tiles[forwardMove.x][forwardMove.y].piece) {
+            if (!tiles[forwardMove.x][forwardMove.y]) {
                 legalMoves.push(forwardMove);
             }
         }

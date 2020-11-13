@@ -28,7 +28,7 @@ describe('Finding moves', () => {
     });
 
     test("Should not find a legal move if there is a piece in front of black", () => {
-        tiles[1][2].piece = new Pawn(1, 2, COLOUR.BLACK);
+        tiles[1][2] = new Pawn(1, 2, COLOUR.BLACK);
 
         const pawn = new Pawn(1, 1, COLOUR.BLACK);
         const legalMoves = pawn.findLegalMoves(tiles);
@@ -36,7 +36,7 @@ describe('Finding moves', () => {
     });
 
     test("Should not find a legal move if there is a piece in front of white", () => {
-        tiles[1][5].piece = new Pawn(1, 5, COLOUR.WHITE);
+        tiles[1][5] = new Pawn(1, 5, COLOUR.WHITE);
 
         const pawn = new Pawn(1, 6, COLOUR.WHITE);
         const legalMoves = pawn.findLegalMoves(tiles);
