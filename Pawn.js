@@ -25,4 +25,15 @@ export default class Pawn {
 
         return legalMoves;
     }
+
+    draw(x, y) {
+        push();
+        if (this.colour == COLOUR.BLACK) {
+            ellipse(x, y, 40, 40);
+        } else {
+            fill(0);
+            ellipse(x, y, 40, 40);
+        }
+        pop();
+    }
 }

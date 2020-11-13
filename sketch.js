@@ -11,3 +11,9 @@ window.draw = () => {
     background(220);
     board.draw();
 }
+
+window.onclick = function(evt) {
+    const x = evt.clientX;
+    const y = evt.clientY;
+    board.select(x, y);
+}

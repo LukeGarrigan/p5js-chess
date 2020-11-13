@@ -6,7 +6,6 @@ export default class Board {
     constructor() {
         this.sizeOfSquare = SIZE / 8;
         this.tiles = this.createTiles();
-        this.selected = {x: 1, y: 1};
     }
 
 
@@ -29,36 +28,53 @@ export default class Board {
     }
 
     draw() {
-        let offset = this.sizeOfSquare/2;
         rectMode(CENTER);
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 8; j++) {
                 const currentTile = this.tiles[i][j];
-                const x =  i * this.sizeOfSquare + offset;
-                const y = j * this.sizeOfSquare + offset;
+                const x =  this.getPos(i);
+                const y = this.getPos(j);
                 rect(x, y, this.sizeOfSquare, this.sizeOfSquare);
 
                 if (currentTile instanceof Pawn) {
-                    push();
-                    if (currentTile.colour == COLOUR.BLACK) {
-                        ellipse(x, y, 40, 40);
-                    } else {
-                        fill(0);
-                        ellipse(x, y, 40, 40);
-                    }
-                    pop();
+                    currentTile.draw(x, y);
                 }
             }
         }
+        this.displaySelected();
+    }
 
-/*         const selectedTile = this.tiles[this.selected.x][this.selected.y];
-        let legalMoves = selectedTile.piece.findLegalMoves(this.tiles);
-        push();
-        fill(255,100,50);
-        const legalMoveTile = this.tiles[legalMoves[0].x][legalMoves[0].y];
-        
-        rect(legalMoveTile.x, legalMoveTile.y, this.sizeOfSquare, this.sizeOfSquare)
-        pop(); */
+    displaySelected() {
+        if (this.selected) {
+            const tile = this.tiles[this.selected.x][this.selected.y];
+            if (tile) {
+                const legalMoves = tile.findLegalMoves(this.tiles);
+                push();
+                fill(255,100,50);
+                rect(this.getPos(legalMoves[0].x), this.getPos(legalMoves[0].y), this.sizeOfSquare, this.sizeOfSquare)
+                pop(); 
+            }
+        }
+    }
+
+    getPos(index) {
+        let offset = this.sizeOfSquare/2;
+        return index * this.sizeOfSquare + offset
+    }
+
+    select(clientX, clientY) {
+        const x = Math.floor(clientX / 100);
+        const y = Math.floor(clientY / 100);
+
+        if (this.tiles[x][y]) {
+
+            if (!this.selected) {
+                this.selected = {x, y}
+            } else {
+                this.selected.x = x;
+                this.selected.y = y;
+            }
+        }
     }
 
 }

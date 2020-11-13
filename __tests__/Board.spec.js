@@ -15,6 +15,14 @@ describe('Creating the tiles', () => {
             expect(board.tiles[i].length).toBe(8);
         }
     });
+
+    test('Should return the x position of the tile', () => {
+        let count = 50;
+        for (let i = 0; i < 8; i++) {
+            expect(board.getPos(i)).toBe(count);
+            count += 100;
+        }
+    });
 })
 
 
@@ -37,6 +45,31 @@ describe('Creating the pieces', () => {
         }
     });
 })
+
+describe('Selecting pieces', () => {
+    let board;
+    beforeEach(() => {
+        board = new Board();
+    })
+
+    test('No tile should be selected to begin with', () => {
+        expect(board.selected).toBe(undefined)
+    })
+    
+    test('Should select first pawn', () => {
+        board.select(100, 100);
+
+        expect(board.selected.x).toBe(1);
+        expect(board.selected.y).toBe(1);
+
+    })
+    
+    test('Should not select as piece doesnt exist', () => {
+        board.select(300, 300);
+        expect(board.selected).toBe(undefined)
+    })
+
+});
 
 
 
