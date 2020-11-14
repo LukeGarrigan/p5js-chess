@@ -69,6 +69,21 @@ describe('Selecting pieces', () => {
         expect(board.selected).toBe(undefined)
     })
 
+    test('Should move selected piece to the selected possible move', () => {
+        // select first pawn
+        board.select(100, 100);
+        board.legalMoves = [{x:1, y:2}];
+        // select the possible move
+        board.select(100, 200);
+
+        // should reset selection
+        expect(board.selected).toBe(undefined);
+
+        expect(board.tiles[1][2] instanceof Pawn).toBeTruthy();
+    })
+
+
+
 });
 
 

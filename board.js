@@ -48,10 +48,13 @@ export default class Board {
         if (this.selected) {
             const tile = this.tiles[this.selected.x][this.selected.y];
             if (tile) {
-                const legalMoves = tile.findLegalMoves(this.tiles);
+                this.legalMoves = tile.findLegalMoves(this.tiles);
                 push();
-                fill(255,100,50);
-                rect(this.getPos(legalMoves[0].x), this.getPos(legalMoves[0].y), this.sizeOfSquare, this.sizeOfSquare)
+                fill(100,255,100);
+
+                for (const move of this.legalMoves) {
+                    rect(this.getPos(move.x), this.getPos(move.y), this.sizeOfSquare, this.sizeOfSquare)
+                }
                 pop(); 
             }
         }
@@ -67,14 +70,23 @@ export default class Board {
         const y = Math.floor(clientY / 100);
 
         if (this.tiles[x][y]) {
-
-            if (!this.selected) {
-                this.selected = {x, y}
-            } else {
-                this.selected.x = x;
-                this.selected.y = y;
+            this.selected = JSON.parse(JSON.stringify(this.tiles[x][y]));
+        } else if (this.selected) {
+            const potentialMove = this.legalMoves.find(e => e.x == x && e.y == y);
+            if (potentialMove) {
+                this.move(potentialMove);
             }
-        }
+        } 
+    }
+
+    move(endTile) {
+        this.tiles[endTile.x][endTile.y] = this.tiles[this.selected.x][this.selected.y];
+        this.tiles[endTile.x][endTile.y].move(endTile.x, endTile.y);
+
+        this.tiles[endTile.x][endTile.y].x = endTile.x;
+        this.tiles[endTile.x][endTile.y].y = endTile.y;
+        this.tiles[this.selected.x][this.selected.y] = undefined;
+        this.selected = undefined;
     }
 
 }
