@@ -15,5 +15,5 @@ window.draw = () => {
 window.onclick = function(evt) {
     const x = evt.clientX;
     const y = evt.clientY;
-    board.select(x, y);
+    board.userClick(x, y);
 }

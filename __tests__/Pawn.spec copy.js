@@ -67,6 +67,46 @@ describe('Finding moves', () => {
         expect(legalMoves[1].y).toBe(3)
     })
 
+    test('Should find no legal moves if enemy pawn in front', () => {
+        // given
+        const pawnInFront = new Pawn(1, 5, COLOUR.BLACK);
+        tiles[1][5] = pawnInFront;
+        const pawn = new Pawn(1, 6, COLOUR.WHITE);
+
+        // when
+        const legalMoves = pawn.findLegalMoves(tiles);
+
+        // then 
+        expect(legalMoves.length).toBe(0);
+    })
+
+
+    test('Should not be able to jump over pieces on the first move', () => {
+        // given
+        const pawnInFront = new Pawn(1, 5, COLOUR.WHITE);
+        tiles[1][5] = pawnInFront;
+        const pawn = new Pawn(1, 6, COLOUR.WHITE);
+
+        // when
+        const legalMoves = pawn.findLegalMoves(tiles);
+
+        // then 
+        expect(legalMoves.length).toBe(0);
+    });
+
+    test('Should show 3 legal moves if enemy pawn diagonal to current pawn that hasnt yet move', () => {
+        // given
+        const diagonalPawn = new Pawn(2, 5, COLOUR.BLACK);
+        tiles[2][5] = diagonalPawn;
+        const pawn = new Pawn(1, 6, COLOUR.WHITE);
+
+        // when
+        const legalMoves = pawn.findLegalMoves(tiles);
+
+        // then 
+        expect(legalMoves.length).toBe(3);
+    });
+
 
 })
 

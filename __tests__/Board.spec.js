@@ -57,7 +57,7 @@ describe('Selecting pieces', () => {
     })
     
     test('Should select first pawn', () => {
-        board.select(100, 100);
+        board.userClick(100, 100);
 
         expect(board.selected.x).toBe(1);
         expect(board.selected.y).toBe(1);
@@ -65,16 +65,26 @@ describe('Selecting pieces', () => {
     })
     
     test('Should not select as piece doesnt exist', () => {
-        board.select(300, 300);
+        board.userClick(300, 300);
         expect(board.selected).toBe(undefined)
     })
 
+    
+});
+
+
+describe('Moving pieces', () => {
+    let board;
+    beforeEach(() => {
+        board = new Board();
+    })
     test('Should move selected piece to the selected possible move', () => {
         // select first pawn
-        board.select(100, 100);
+        board.turn = COLOUR.BLACK;
+        board.userClick(100, 100);
         board.legalMoves = [{x:1, y:2}];
         // select the possible move
-        board.select(100, 200);
+        board.userClick(100, 200);
 
         // should reset selection
         expect(board.selected).toBe(undefined);
@@ -82,9 +92,16 @@ describe('Selecting pieces', () => {
         expect(board.tiles[1][2] instanceof Pawn).toBeTruthy();
     })
 
+    test('First move should be white', () => {
+        expect(board.turn).toBe(COLOUR.WHITE);
+    });
 
+    test('When a move has happened should switch players', () => {
+        const pawnToMove = board.tiles[0][6];
+        board.move(pawnToMove, {x: 0, y: 7});
+        expect(board.turn).toBe(COLOUR.BLACK);
+    });
 
-});
-
+})
 
 

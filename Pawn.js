@@ -2,10 +2,7 @@ import { COLOUR } from "./constants.js";
 import Piece from "./Piece.js";
 export default class Pawn extends Piece {
     constructor(x, y, colour) {
-        super(x, y);
-        this.colour = colour;
-        this.hasMoved = false;
-
+        super(x, y, colour);
         this.direction = this.colour === COLOUR.BLACK ? 1 : -1;
     }
 
@@ -15,13 +12,24 @@ export default class Pawn extends Piece {
         const forwardMove = { x: this.x, y: this.y + this.direction}
         if (!tiles[forwardMove.x][forwardMove.y]) {
             legalMoves.push(forwardMove);
+            if (!this.hasMoved) {
+                const twoSquareMove = {x: this.x, y: this.y + (this.direction*2)};
+                if (!tiles[this.x][twoSquareMove.y]) {
+                    legalMoves.push(twoSquareMove);
+                }
+            }
         }
 
-        if (!this.hasMoved) {
-            const twoSquareMove = {x: this.x, y: this.y + (this.direction*2)};
-            if (!tiles[this.x][twoSquareMove.y]) {
-                legalMoves.push(twoSquareMove);
-            }
+        // attacks
+        const diagonalLeft = tiles[this.x-1][this.y + this.direction];
+        const diagonalRight = tiles[this.x+1][this.y + this.direction];
+
+        if (diagonalLeft && diagonalLeft.colour !== this.colour) {
+            legalMoves.push({x: this.x-1, y: this.y + this.direction});
+        }
+
+        if (diagonalRight && diagonalRight.colour !== this.colour) {
+            legalMoves.push({x: this.x+1, y: this.y + this.direction});
         }
         return legalMoves;
     }
