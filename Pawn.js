@@ -19,19 +19,27 @@ export default class Pawn extends Piece {
                 }
             }
         }
-
         // attacks
-        const diagonalLeft = tiles[this.x-1][this.y + this.direction];
-        const diagonalRight = tiles[this.x+1][this.y + this.direction];
-
-        if (diagonalLeft && diagonalLeft.colour !== this.colour) {
-            legalMoves.push({x: this.x-1, y: this.y + this.direction});
-        }
-
-        if (diagonalRight && diagonalRight.colour !== this.colour) {
-            legalMoves.push({x: this.x+1, y: this.y + this.direction});
-        }
+        legalMoves.push(...this.findAttacks(tiles));
         return legalMoves;
+    }
+
+    findAttacks(tiles) {
+        let attacks = [];
+        if (this.x - 1 >= 0) {
+            const diagonalLeft = tiles[this.x-1][this.y + this.direction];
+            if (diagonalLeft && diagonalLeft.colour !== this.colour) {
+                attacks.push({x: this.x-1, y: this.y + this.direction});
+            }
+        }
+
+        if (this.x + 1 < 8) {
+            const diagonalRight = tiles[this.x+1][this.y + this.direction];
+            if (diagonalRight && diagonalRight.colour !== this.colour) {
+                attacks.push({x: this.x+1, y: this.y + this.direction});
+            }
+        }
+        return attacks;
     }
 
     draw(x, y) {
