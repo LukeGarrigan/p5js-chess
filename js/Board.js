@@ -1,5 +1,6 @@
 import {COLOUR, SIZE} from './constants.js';
 import Pawn from './Pawn.js';
+import Rook from './Rook.js';
 
 export default class Board {
 
@@ -25,6 +26,11 @@ export default class Board {
                 }
             }
         }
+
+        tiles[0][0] = new Rook(0, 7, COLOUR.BLACK);
+        tiles[7][0] = new Rook(7, 0, COLOUR.BLACK);
+        tiles[0][7] = new Rook(0, 7, COLOUR.WHITE);
+        tiles[7][7] = new Rook(7, 7, COLOUR.WHITE);
         return tiles;
     }
 
@@ -37,7 +43,7 @@ export default class Board {
                 const y = this.getPos(j);
                 rect(x, y, this.sizeOfSquare, this.sizeOfSquare);
 
-                if (currentTile instanceof Pawn) {
+                if (currentTile)  {
                     currentTile.draw(x, y);
                 }
             }
@@ -49,7 +55,7 @@ export default class Board {
         if (this.selected) {
             const tile = this.tiles[this.selected.x][this.selected.y];
             if (tile) {
-                this.legalMoves = tile.findLegalMoves(this.tiles);
+                this.legalMoves = tile.findMoves(this.tiles);
                 push();
                 fill(100,255,100, 100);
 

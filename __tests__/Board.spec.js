@@ -1,7 +1,8 @@
 
 import Board from '../js/Board.js';
-import { SIZE, COLOUR } from '../src/constants.js';
-import Pawn from '../src/Pawn.js';
+import { SIZE, COLOUR } from '../js/constants.js';
+import Pawn from '../js/Pawn.js';
+import Rook from '../js/Rook.js';
 
 describe('Creating the tiles', () => {
     let board;
@@ -43,6 +44,16 @@ describe('Creating the pieces', () => {
             const tileWithPawn = board.tiles[i][6];
             expect(tileWithPawn).toStrictEqual(new Pawn(i, 6, COLOUR.WHITE));
         }
+    });
+
+    test('Should create black rooks', () => {
+        expect(board.tiles[0][0] instanceof Rook).toBeTruthy();
+        expect(board.tiles[7][0] instanceof Rook).toBeTruthy();
+    });
+
+    test('Should create white rooks', () => {
+        expect(board.tiles[0][7] instanceof Rook).toBeTruthy();
+        expect(board.tiles[7][7] instanceof Rook).toBeTruthy();
     });
 });
 

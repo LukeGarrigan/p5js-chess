@@ -1,7 +1,7 @@
 
 import Board from '../js/Board.js';
-import { SIZE, COLOUR } from '../src/constants.js';
-import Pawn from '../src/Pawn.js';
+import { SIZE, COLOUR } from '../js/constants.js';
+import Pawn from '../js/Pawn.js';
 
 describe('Finding moves', () => {
     let tiles;
@@ -12,7 +12,7 @@ describe('Finding moves', () => {
     test('Should find legal move for black in starting position', () => {
         const pawn = new Pawn(1, 1, COLOUR.BLACK);
         pawn.hasMoved = true;
-        const legalMoves = pawn.findLegalMoves(tiles);
+        const legalMoves = pawn.findMoves(tiles);
         expect(legalMoves.length).toBe(1);
 
         expect(legalMoves[0].x).toBe(pawn.x);
@@ -22,7 +22,7 @@ describe('Finding moves', () => {
     test('Should find legal move for white in starting position', () => {
         const pawn = new Pawn(1, 6, COLOUR.WHITE);
         pawn.hasMoved = true;
-        const legalMoves = pawn.findLegalMoves(tiles);
+        const legalMoves = pawn.findMoves(tiles);
         expect(legalMoves.length).toBe(1);
 
         expect(legalMoves[0].x).toBe(pawn.x);
@@ -33,7 +33,7 @@ describe('Finding moves', () => {
         tiles[1][2] = new Pawn(1, 2, COLOUR.BLACK);
         const pawn = new Pawn(1, 1, COLOUR.BLACK);
         pawn.hasMoved = true;
-        const legalMoves = pawn.findLegalMoves(tiles);
+        const legalMoves = pawn.findMoves(tiles);
         expect(legalMoves.length).toBe(0);
     });
 
@@ -41,13 +41,13 @@ describe('Finding moves', () => {
         tiles[1][5] = new Pawn(1, 5, COLOUR.WHITE);
         const pawn = new Pawn(1, 6, COLOUR.WHITE);
         pawn.hasMoved = true;
-        const legalMoves = pawn.findLegalMoves(tiles);
+        const legalMoves = pawn.findMoves(tiles);
         expect(legalMoves.length).toBe(0);
     });
 
     test('Should find two possible moves if the white pawn hasn\'t yet moved', () => {
         const pawn = new Pawn(1, 6, COLOUR.WHITE);
-        const legalMoves = pawn.findLegalMoves(tiles);
+        const legalMoves = pawn.findMoves(tiles);
         expect(legalMoves.length).toBe(2);
 
         expect(legalMoves[0].x).toBe(1);
@@ -58,7 +58,7 @@ describe('Finding moves', () => {
 
     test('Should find two possible moves if the black pawn hasn\'t yet moved', () => {
         const pawn = new Pawn(1, 1, COLOUR.BLACK);
-        const legalMoves = pawn.findLegalMoves(tiles);
+        const legalMoves = pawn.findMoves(tiles);
         expect(legalMoves.length).toBe(2);
 
         expect(legalMoves[0].x).toBe(1);
@@ -74,7 +74,7 @@ describe('Finding moves', () => {
         const pawn = new Pawn(1, 6, COLOUR.WHITE);
 
         // when
-        const legalMoves = pawn.findLegalMoves(tiles);
+        const legalMoves = pawn.findMoves(tiles);
 
         // then 
         expect(legalMoves.length).toBe(0);
@@ -88,7 +88,7 @@ describe('Finding moves', () => {
         const pawn = new Pawn(1, 6, COLOUR.WHITE);
 
         // when
-        const legalMoves = pawn.findLegalMoves(tiles);
+        const legalMoves = pawn.findMoves(tiles);
 
         // then 
         expect(legalMoves.length).toBe(0);
@@ -101,7 +101,7 @@ describe('Finding moves', () => {
         const pawn = new Pawn(1, 6, COLOUR.WHITE);
 
         // when
-        const legalMoves = pawn.findLegalMoves(tiles);
+        const legalMoves = pawn.findMoves(tiles);
 
         // then 
         expect(legalMoves.length).toBe(3);
@@ -113,7 +113,7 @@ describe('Finding moves', () => {
         const pawn = new Pawn(0, 6, COLOUR.WHITE);
 
         // when
-        const legalMoves = pawn.findLegalMoves(tiles);
+        const legalMoves = pawn.findMoves(tiles);
 
         // then 
         expect(legalMoves.length).toBe(2);

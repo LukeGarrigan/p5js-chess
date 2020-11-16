@@ -7,7 +7,7 @@ export default class Pawn extends Piece {
     }
 
 
-    findLegalMoves(tiles) {
+    findMoves(tiles) {
         let legalMoves = [];
         const forwardMove = { x: this.x, y: this.y + this.direction};
         if (!tiles[forwardMove.x][forwardMove.y]) {
@@ -19,7 +19,6 @@ export default class Pawn extends Piece {
                 }
             }
         }
-        // attacks
         legalMoves.push(...this.findAttacks(tiles));
         return legalMoves;
     }
