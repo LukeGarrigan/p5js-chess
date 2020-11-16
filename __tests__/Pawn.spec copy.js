@@ -1,7 +1,7 @@
 
-import Board from '../Board.js';
-import { SIZE, COLOUR } from '../constants.js';
-import Pawn from '../Pawn.js';
+import Board from '../js/Board.js';
+import { SIZE, COLOUR } from '../src/constants.js';
+import Pawn from '../src/Pawn.js';
 
 describe('Finding moves', () => {
     let tiles;
@@ -106,6 +106,19 @@ describe('Finding moves', () => {
         // then 
         expect(legalMoves.length).toBe(3);
     });
+
+
+    test('Should show 2 legal if a side pawn', () => {
+        // given
+        const pawn = new Pawn(0, 6, COLOUR.WHITE);
+
+        // when
+        const legalMoves = pawn.findLegalMoves(tiles);
+
+        // then 
+        expect(legalMoves.length).toBe(2);
+    });
+
 
 
 });

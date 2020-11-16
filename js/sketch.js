@@ -1,4 +1,4 @@
-import Board from './board.js';
+import Board from './Board.js';
 import {SIZE} from './constants.js';
 let board;
 
