@@ -1,5 +1,5 @@
-import { COLOUR } from "./constants.js";
-import Piece from "./Piece.js";
+import { COLOUR } from './constants.js';
+import Piece from './Piece.js';
 export default class Pawn extends Piece {
     constructor(x, y, colour) {
         super(x, y, colour);
@@ -9,7 +9,7 @@ export default class Pawn extends Piece {
 
     findLegalMoves(tiles) {
         let legalMoves = [];
-        const forwardMove = { x: this.x, y: this.y + this.direction}
+        const forwardMove = { x: this.x, y: this.y + this.direction};
         if (!tiles[forwardMove.x][forwardMove.y]) {
             legalMoves.push(forwardMove);
             if (!this.hasMoved) {

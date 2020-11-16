@@ -1,5 +1,5 @@
-import {COLOUR, SIZE} from "./constants.js";
-import Pawn from "./Pawn.js";
+import {COLOUR, SIZE} from './constants.js';
+import Pawn from './Pawn.js';
 
 export default class Board {
 
@@ -54,7 +54,7 @@ export default class Board {
                 fill(100,255,100, 100);
 
                 for (const move of this.legalMoves) {
-                    rect(this.getPos(move.x), this.getPos(move.y), this.sizeOfSquare, this.sizeOfSquare)
+                    rect(this.getPos(move.x), this.getPos(move.y), this.sizeOfSquare, this.sizeOfSquare);
                 }
                 pop(); 
             }
@@ -63,7 +63,7 @@ export default class Board {
 
     getPos(index) {
         let offset = this.sizeOfSquare/2;
-        return index * this.sizeOfSquare + offset
+        return index * this.sizeOfSquare + offset;
     }
 
     userClick(clientX, clientY) {
