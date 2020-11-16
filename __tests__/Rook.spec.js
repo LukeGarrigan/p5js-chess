@@ -15,12 +15,17 @@ describe('Finding moves', () => {
 
     test('Should find 5 legal moves if the pawn in front is not there', () => {
         tiles[0][6] = undefined;
-        expect(tiles[0][7].findBackwardMoves(tiles).length).toBe(5);
+        expect(tiles[0][7].findBackwardMoves(tiles).length).toBe(6);
     });
-    
+
     test('Should find 4 legal moves when blocked by black pawn so can go back and go right', () => {
         tiles[0][2] = new Rook(0, 2, COLOUR.WHITE);
-        expect(tiles[0][2].findMoves(tiles).length).toBe(10);
+        expect(tiles[0][2].findMoves(tiles).length).toBe(11);
+    });
+
+    test('Should find one attacking move if the pawn in front is enemy', () => {
+        tiles[0][6].colour = COLOUR.BLACK;
+        expect(tiles[0][7].findBackwardMoves(tiles).length).toBe(1);
     });
 });
 

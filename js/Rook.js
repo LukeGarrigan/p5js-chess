@@ -21,6 +21,9 @@ export default class Rook extends Piece {
         let moves = [];
         for (let i = this.y + 1; i < 8; i++) {
             if (tiles[this.x][i]) {
+                if (tiles[this.x][i].colour !== this.colour) {
+                    moves.push({x : this.x, y: i});         
+                }
                 return moves;
             }
             moves.push({x : this.x, y: i});
@@ -32,6 +35,9 @@ export default class Rook extends Piece {
         let moves = [];
         for (let i = this.y - 1; i >= 0; i--) {
             if (tiles[this.x][i]) {
+                if (tiles[this.x][i].colour !== this.colour) {
+                    moves.push({x: this.x, y: i});                    
+                }
                 return moves;
             }
             moves.push({x: this.x, y: i});
@@ -43,6 +49,9 @@ export default class Rook extends Piece {
         let moves = [];
         for (let i = this.x - 1; i >= 0; i--) {
             if (tiles[i][this.y]) {
+                if (tiles[i][this.y].colour !== this.colour) {
+                    moves.push({x: i, y: this.y});     
+                }
                 return moves;
             }
             moves.push({x: i, y: this.y});
@@ -54,6 +63,9 @@ export default class Rook extends Piece {
         let moves = [];
         for (let i = this.x + 1; i < 8; i++) {
             if (tiles[i][this.y]) {
+                if (tiles[i][this.y].colour !== this.colour) {
+                    moves.push({x: i, y: this.y});   
+                }
                 return moves;
             }
             moves.push({x: i, y: this.y});
