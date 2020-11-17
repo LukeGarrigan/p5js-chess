@@ -1,3 +1,4 @@
+import Bishop from './Bishop.js';
 import {COLOUR, SIZE} from './constants.js';
 import Pawn from './Pawn.js';
 import Rook from './Rook.js';
@@ -10,28 +11,38 @@ export default class Board {
         this.turn = COLOUR.WHITE;
     }
 
-
     createTiles() {
-        let tiles = [];
-        for (let i = 0; i < 8; i++) {
-            tiles[i] = [];
-            for (let j = 0; j < 8; j++) {
+        let tiles = this.createEmptyBoard();
 
-                if (j == 1) {
-                    tiles[i][j] = new Pawn(i, j, COLOUR.BLACK);
-                } else if (j == 6) {
-                    tiles[i][j] = new Pawn(i, j, COLOUR.WHITE);
-                } else {
-                    tiles[i][j] = undefined;
-                }
-            }
+        for (let i = 0; i < 8; i++) { 
+            tiles[i][1] = new Pawn(i, 1, COLOUR.BLACK);
+            tiles[i][6] = new Pawn(i, 6, COLOUR.WHITE);
         }
 
         tiles[0][0] = new Rook(0, 7, COLOUR.BLACK);
         tiles[7][0] = new Rook(7, 0, COLOUR.BLACK);
         tiles[0][7] = new Rook(0, 7, COLOUR.WHITE);
         tiles[7][7] = new Rook(7, 7, COLOUR.WHITE);
+
+        tiles[5][0] = new Bishop(2, 0, COLOUR.BLACK);
+        tiles[5][0] = new Bishop(5, 0, COLOUR.BLACK);
+        tiles[2][7] = new Bishop(3, 7, COLOUR.WHITE);
+        tiles[5][7] = new Bishop(5, 7, COLOUR.WHITE);
+        
+
+
         return tiles;
+    }
+    
+    createEmptyBoard() {
+        let board = [];
+        for (let i = 0; i < 8; i++) {
+            board[i] = [];
+            for (let j = 0; j < 8; j++) {
+                board[i][j] = undefined;
+            }
+        }
+        return board;
     }
 
     draw() {

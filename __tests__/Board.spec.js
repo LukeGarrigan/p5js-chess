@@ -24,6 +24,18 @@ describe('Creating the tiles', () => {
             count += 100;
         }
     });
+
+
+    test('Should create empty board', () => {
+
+        const emptyBoard = board.createEmptyBoard();
+
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) {
+                expect(emptyBoard[i][j]).toBeUndefined();
+            }
+        }
+    });
 });
 
 
