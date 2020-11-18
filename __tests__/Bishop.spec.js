@@ -113,7 +113,7 @@ describe('All directions', () => {
         const moves = bishop.findMoves(emptyTiles);
 
         // then
-        expect(moves.length).toBe(3);
+        expect(moves.length).toBe(13);
     });
 })
 

@@ -2,6 +2,7 @@ import Bishop from './Bishop.js';
 import {COLOUR, SIZE} from './constants.js';
 import Pawn from './Pawn.js';
 import Rook from './Rook.js';
+import Knight from './Knight.js';
 
 export default class Board {
 
@@ -28,6 +29,15 @@ export default class Board {
         tiles[5][0] = new Bishop(5, 0, COLOUR.BLACK);
         tiles[2][7] = new Bishop(2, 7, COLOUR.WHITE);
         tiles[5][7] = new Bishop(5, 7, COLOUR.WHITE);
+
+
+        tiles[1][0] = new Knight(1, 0, COLOUR.BLACK);
+        tiles[6][0] = new Knight(6, 0, COLOUR.BLACK);
+        tiles[1][7] = new Knight(1, 7, COLOUR.WHITE);
+        tiles[6][7] = new Knight(6, 7, COLOUR.WHITE);
+
+
+
         
 
 
