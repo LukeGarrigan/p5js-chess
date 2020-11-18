@@ -8,88 +8,20 @@ export default class Bishop extends Piece {
 
     findMoves(tiles) {
         let moves = [];
-
-        moves.push(...this.findUpRightMoves(tiles));
-        moves.push(...this.findUpLeftMoves(tiles));
-        moves.push(...this.findDownRightMoves(tiles));
-        moves.push(...this.findDownLeftMoves(tiles));
+        moves.push(...this.findAllMoves(1, -1, tiles));
+        moves.push(...this.findAllMoves(-1, -1, tiles));
+        moves.push(...this.findAllMoves(1, 1, tiles));
+        moves.push(...this.findAllMoves(-1, 1, tiles));
         return moves;
     }
 
-    findUpRightMoves(tiles) {
+    findAllMoves(xDir, yDir, tiles) {
         let moves = [];
         for (let i = 1; i < 8; i++) {
-            let newX = this.x + i;
-            let newY = this.y - i;
+            let newX = this.x + (xDir * i);
+            let newY = this.y + (yDir * i);
 
-            if (newX > 7 || newY < 0) {
-                return moves;
-            }
-
-            if (tiles[newX][newY]) {
-                if (tiles[newX][newY].colour !== this.colour) {
-                    moves.push({x : newX, y: newY});         
-                }
-                return moves;
-            }
-            moves.push({x : newX, y: newY});
-        }
-        return moves;
-    }
-
-
-    findUpLeftMoves(tiles) {
-        let moves = [];
-        for (let i = 1; i < 8; i++) {
-            let newX = this.x - i;
-            let newY = this.y - i;
-
-            if (newY > 7 || newX < 0) {
-                return moves;
-            }
-
-            if (tiles[newX][newY]) {
-                if (tiles[newX][newY].colour !== this.colour) {
-                    moves.push({x : newX, y: newY});         
-                }
-                return moves;
-            }
-            moves.push({x : newX, y: newY});
-        }
-        return moves;
-    }
-
-
-    
-    findDownRightMoves(tiles) {
-        let moves = [];
-        for (let i = 1; i < 8; i++) {
-            let newX = this.x + i;
-            let newY = this.y + i;
-
-            if (newY > 7 || newX > 7) {
-                return moves;
-            }
-
-            if (tiles[newX][newY]) {
-                if (tiles[newX][newY].colour !== this.colour) {
-                    moves.push({x : newX, y: newY});         
-                }
-                return moves;
-            }
-            moves.push({x : newX, y: newY});
-        }
-        return moves;
-    }
-
-        
-    findDownLeftMoves(tiles) {
-        let moves = [];
-        for (let i = 1; i < 8; i++) {
-            let newX = this.x - i;
-            let newY = this.y + i;
-
-            if (newY > 7 || newX < 0) {
+            if (newX > 7 || newX < 0 || newY > 7 || newY < 0) {
                 return moves;
             }
 

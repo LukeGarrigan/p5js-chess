@@ -22,16 +22,16 @@ describe('Diagonal up moves', () => {
         expect(upRightMoves.length).toBe(7);
     });
 
-    test('Should find 6 moves as white bishop one up from bottom left of board', () => {
+    test('Should find 8 moves as white bishop one up from bottom left of board', () => {
         // given
         const bishop = new Bishop(1, 6, COLOUR.WHITE);
         emptyTiles[1][6] = bishop;
 
         // when
-        const upRightMoves = bishop.findUpRightMoves(emptyTiles);
+        const upRightMoves = bishop.findMoves(emptyTiles);
 
         // then
-        expect(upRightMoves.length).toBe(6);
+        expect(upRightMoves.length).toBe(9);
     });
     
     test('Should find 7 moves as white bishop at the bottom right of board', () => {
@@ -110,7 +110,7 @@ describe('All directions', () => {
         emptyTiles[3][3] = bishop;
 
         // when
-        const moves = bishop.findDownLeftMoves(emptyTiles);
+        const moves = bishop.findMoves(emptyTiles);
 
         // then
         expect(moves.length).toBe(3);

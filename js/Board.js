@@ -54,7 +54,7 @@ export default class Board {
                 const x =  this.getPos(i);
                 const y = this.getPos(j);
 
-                if ((i + j) % 2 == 0) {
+                if ((i + j) % 2 != 0) {
                     push();
                     fill(205, 205, 205);
                     rect(x, y, this.sizeOfSquare, this.sizeOfSquare);
