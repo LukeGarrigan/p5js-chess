@@ -24,9 +24,9 @@ export default class Board {
         tiles[0][7] = new Rook(0, 7, COLOUR.WHITE);
         tiles[7][7] = new Rook(7, 7, COLOUR.WHITE);
 
-        tiles[5][0] = new Bishop(2, 0, COLOUR.BLACK);
+        tiles[2][0] = new Bishop(2, 0, COLOUR.BLACK);
         tiles[5][0] = new Bishop(5, 0, COLOUR.BLACK);
-        tiles[2][7] = new Bishop(3, 7, COLOUR.WHITE);
+        tiles[2][7] = new Bishop(2, 7, COLOUR.WHITE);
         tiles[5][7] = new Bishop(5, 7, COLOUR.WHITE);
         
 
@@ -48,11 +48,24 @@ export default class Board {
     draw() {
         rectMode(CENTER);
         for (let i = 0; i < 8; i++) {
+            
             for (let j = 0; j < 8; j++) {
                 const currentTile = this.tiles[i][j];
                 const x =  this.getPos(i);
                 const y = this.getPos(j);
-                rect(x, y, this.sizeOfSquare, this.sizeOfSquare);
+
+                if ((i + j) % 2 == 0) {
+                    push();
+                    fill(205, 205, 205);
+                    rect(x, y, this.sizeOfSquare, this.sizeOfSquare);
+                    pop();
+                } else {
+                    push();
+                    fill(255, 255, 255);
+                    rect(x, y, this.sizeOfSquare, this.sizeOfSquare);
+                    pop();
+                }
+                
 
                 if (currentTile)  {
                     currentTile.draw(x, y);
