@@ -94,7 +94,7 @@ describe('Finding moves', () => {
         expect(legalMoves.length).toBe(0);
     });
 
-    test('Should show 3 legal moves if enemy pawn diagonal to current pawn that hasnt yet move', () => {
+    test('Should show 3 legal moves if enemy pawn diagonal right to current pawn that hasnt yet move', () => {
         // given
         const diagonalPawn = new Pawn(2, 5, COLOUR.BLACK);
         tiles[2][5] = diagonalPawn;
@@ -106,6 +106,23 @@ describe('Finding moves', () => {
         // then 
         expect(legalMoves.length).toBe(3);
     });
+
+
+    
+    test('Should show 3 legal moves if enemy pawn diagonal left to current pawn that hasnt yet move', () => {
+        // given
+        const diagonalPawn = new Pawn(0, 5, COLOUR.BLACK);
+        tiles[0][5] = diagonalPawn;
+        const pawn = new Pawn(1, 6, COLOUR.WHITE);
+
+        // when
+        const legalMoves = pawn.findMoves(tiles);
+
+        // then 
+        expect(legalMoves.length).toBe(3);
+    });
+
+
 
 
     test('Should show 2 legal if a side pawn', () => {
