@@ -14,6 +14,10 @@ export default class King extends Piece {
         moves.push(this.getMove(-1, 0, tiles));
         moves.push(this.getMove(0, 1, tiles));
         moves.push(this.getMove(0, -1, tiles));
+        moves.push(this.getMove(1, -1, tiles));
+        moves.push(this.getMove(-1, -1, tiles));
+        moves.push(this.getMove(-1, 1, tiles));
+        moves.push(this.getMove(1, 1, tiles));
 
         return moves.filter(n => n);
     }
@@ -38,9 +42,9 @@ export default class King extends Piece {
         push();
         if (this.colour == COLOUR.BLACK) {
             fill(0);
-            rect(x, y, 40, 20);
+            rect(x, y, 60, 60);
         } else {
-            rect(x, y, 40, 20);
+            rect(x, y, 60, 60);
         }
         pop();
     }

@@ -20,11 +20,11 @@ describe('Find moves on empty board', () => {
         const upRightMoves = king.findMoves(emptyTiles);
 
         // then
-        expect(upRightMoves.length).toBe(4);        
+        expect(upRightMoves.length).toBe(8);        
     });
 
 
-    test('Should find 2 moves as white king at the bottom left of board', () => {
+    test('Should find 3 moves as white king at the bottom left of board', () => {
         // given
         const king = new King(0, 7, COLOUR.WHITE);
         emptyTiles[0][7] = king;
@@ -33,11 +33,48 @@ describe('Find moves on empty board', () => {
         const upRightMoves = king.findMoves(emptyTiles);
 
         // then
-        expect(upRightMoves.length).toBe(2);
+        expect(upRightMoves.length).toBe(3);
+    });
+
+    test('Should find 3 moves as white king at the bottom right of board', () => {
+        // given
+        const king = new King(7, 7, COLOUR.WHITE);
+        emptyTiles[7][7] = king;
+
+        // when
+        const upRightMoves = king.findMoves(emptyTiles);
+
+        // then
+        expect(upRightMoves.length).toBe(3);
+    });
+
+    test('Should find 3 moves as white king at the top right of board', () => {
+        // given
+        const king = new King(7, 0, COLOUR.WHITE);
+        emptyTiles[7][0] = king;
+
+        // when
+        const upRightMoves = king.findMoves(emptyTiles);
+
+        // then
+        expect(upRightMoves.length).toBe(3);
     });
 
 
-    test('Should find 2 moves as white king at the bottom left of board blocked by a rook', () => {
+    test('Should find 3 moves as white king at the top left of board', () => {
+        // given
+        const king = new King(0, 0, COLOUR.WHITE);
+        emptyTiles[0][0] = king;
+
+        // when
+        const upRightMoves = king.findMoves(emptyTiles);
+
+        // then
+        expect(upRightMoves.length).toBe(3);
+    });
+
+
+    test('Should find 3 moves as white king at the bottom left of board blocked by a rook', () => {
         // given
         const king = new King(0, 7, COLOUR.WHITE);
         emptyTiles[0][7] = king;
@@ -49,7 +86,7 @@ describe('Find moves on empty board', () => {
         const upRightMoves = king.findMoves(emptyTiles);
 
         // then
-        expect(upRightMoves.length).toBe(2);
+        expect(upRightMoves.length).toBe(3);
     });
 
 

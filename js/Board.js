@@ -3,6 +3,7 @@ import {COLOUR, SIZE} from './constants.js';
 import Pawn from './Pawn.js';
 import Rook from './Rook.js';
 import Knight from './Knight.js';
+import King from './King.js';
 
 export default class Board {
 
@@ -35,6 +36,9 @@ export default class Board {
         tiles[6][0] = new Knight(6, 0, COLOUR.BLACK);
         tiles[1][7] = new Knight(1, 7, COLOUR.WHITE);
         tiles[6][7] = new Knight(6, 7, COLOUR.WHITE);
+
+        tiles[4][0] = new King(4, 0, COLOUR.BLACK);
+        tiles[4][7] = new King(4, 7, COLOUR.WHITE);
 
 
 
