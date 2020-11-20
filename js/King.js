@@ -41,10 +41,9 @@ export default class King extends Piece {
     draw(x, y) {
         push();
         if (this.colour == COLOUR.BLACK) {
-            fill(0);
-            rect(x, y, 60, 60);
+            text('♚', x, y);
         } else {
-            rect(x, y, 60, 60);
+            text('♔', x, y);
         }
         pop();
     }

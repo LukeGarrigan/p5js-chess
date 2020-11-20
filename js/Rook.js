@@ -76,10 +76,9 @@ export default class Rook extends Piece {
     draw(x, y) {
         push();
         if (this.colour == COLOUR.BLACK) {
-            fill(0);
-            rect(x, y, 40, 40);
+            text('♜', x, y);
         } else {
-            rect(x, y, 40, 40);
+            text('♖', x, y);
         }
         pop();
     }

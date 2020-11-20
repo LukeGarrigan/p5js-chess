@@ -15,6 +15,8 @@ export default class Board {
     }
 
     createTiles() {
+        textAlign(CENTER, CENTER);
+        textSize(60);
         let tiles = this.createEmptyBoard();
 
         for (let i = 0; i < 8; i++) { 

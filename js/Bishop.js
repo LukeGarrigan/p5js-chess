@@ -39,10 +39,9 @@ export default class Bishop extends Piece {
     draw(x, y) {
         push();
         if (this.colour == COLOUR.BLACK) {
-            fill(0);
-            rect(x, y, 20, 40);
+            text('♝', x, y);
         } else {
-            rect(x, y, 20, 40);
+            text('♗', x, y);
         }
         pop();
     }

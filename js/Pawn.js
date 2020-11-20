@@ -44,10 +44,9 @@ export default class Pawn extends Piece {
     draw(x, y) {
         push();
         if (this.colour == COLOUR.BLACK) {
-            fill(0);
-            ellipse(x, y, 40, 40);
+            text('♟', x, y);
         } else {
-            ellipse(x, y, 40, 40);
+            text('♙', x, y);
         }
         pop();
     }
