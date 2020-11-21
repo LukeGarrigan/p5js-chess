@@ -12,6 +12,7 @@ export default class Board {
         this.sizeOfSquare = SIZE / 8;
         this.tiles = this.createTiles();
         this.turn = COLOUR.WHITE;
+        this.isInCheck = false;
     }
 
     createTiles() {
@@ -137,6 +138,46 @@ export default class Board {
         this.tiles[to.x][to.y].y = to.y;
         this.tiles[from.x][from.y] = undefined;
         this.selected = undefined;
+
+        this.isInCheck = this.isCurrentPlayerInCheck();
+    }
+
+
+    isCurrentPlayerInCheck() {
+
+        const kingPosition = this.getCurrentPlayersKing();        
+        const moves = this.getAllMovesForEnemyPlayer();
+
+        for (let move of moves) {
+            if (move.x == kingPosition.x && move.y == kingPosition.y) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    getCurrentPlayersKing() {
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) { 
+                if (this.tiles[i][j] instanceof King && this.tiles[i][j].colour === this.turn) {
+                    return this.tiles[i][j];
+                }
+            }
+        }
+    }
+
+    getAllMovesForEnemyPlayer() {
+        let enemy = this.turn === COLOUR.WHITE ? COLOUR.BLACK : COLOUR.WHITE;
+        let moves = [];
+
+        for (let i = 0; i < 8; i++) {
+            for (let j = 0; j < 8; j++) { 
+                if (this.tiles[i][j] && this.tiles[i][j].colour === enemy) {
+                    moves.push(...this.tiles[i][j].findMoves(this.tiles));
+                }
+            }
+        }
+        return moves;
     }
 
 }
