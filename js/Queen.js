@@ -1,8 +1,8 @@
 import { COLOUR } from './constants.js';
 import Piece from './Piece.js';
 export default class Queen extends Piece {
-    constructor(x, y, colour) {
-        super(x, y, colour);
+    constructor(x, y, colour, sprite) {
+        super(x, y, colour, sprite);
     }
 
 
@@ -38,15 +38,5 @@ export default class Queen extends Piece {
             moves.push({x : newX, y: newY});
         }
         return moves;
-    }
-
-    draw(x, y) {
-        push();
-        if (this.colour == COLOUR.BLACK) {
-            text('♛', x, y);
-        } else {
-            text('♕', x, y);
-        }
-        pop();
     }
 }

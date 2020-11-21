@@ -47,14 +47,14 @@ describe('Creating the pieces', () => {
     test('Should create black players pawns', () => {
         for (let i = 0; i < 8; i++) {
             const tileWithPawn = board.tiles[i][1];
-            expect(tileWithPawn).toStrictEqual(new Pawn(i, 1, COLOUR.BLACK));
+            expect(tileWithPawn).toStrictEqual(new Pawn(i, 1, COLOUR.BLACK, '♟' ));
         }
     });
 
     test('Should create white players pawns', () => {
         for (let i = 0; i < 8; i++) {
             const tileWithPawn = board.tiles[i][6];
-            expect(tileWithPawn).toStrictEqual(new Pawn(i, 6, COLOUR.WHITE));
+            expect(tileWithPawn).toStrictEqual(new Pawn(i, 6, COLOUR.WHITE, '♙'));
         }
     });
 

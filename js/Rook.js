@@ -1,8 +1,8 @@
 import { COLOUR } from './constants.js';
 import Piece from './Piece.js';
 export default class Rook extends Piece {
-    constructor(x, y, colour) {
-        super(x, y, colour);
+    constructor(x, y, colour, sprite) {
+        super(x, y, colour, sprite);
     }
 
 
@@ -71,15 +71,5 @@ export default class Rook extends Piece {
             moves.push({x: i, y: this.y});
         }
         return moves;
-    }
-
-    draw(x, y) {
-        push();
-        if (this.colour == COLOUR.BLACK) {
-            text('♜', x, y);
-        } else {
-            text('♖', x, y);
-        }
-        pop();
     }
 }

@@ -15,36 +15,34 @@ export default class Board {
     }
 
     createTiles() {
-        textAlign(CENTER, CENTER);
-        textSize(60);
         let tiles = this.createEmptyBoard();
 
         for (let i = 0; i < 8; i++) { 
-            tiles[i][1] = new Pawn(i, 1, COLOUR.BLACK);
-            tiles[i][6] = new Pawn(i, 6, COLOUR.WHITE);
+            tiles[i][1] = new Pawn(i, 1, COLOUR.BLACK, '♟');
+            tiles[i][6] = new Pawn(i, 6, COLOUR.WHITE, '♙');
         }
 
-        tiles[0][0] = new Rook(0, 7, COLOUR.BLACK);
-        tiles[7][0] = new Rook(7, 0, COLOUR.BLACK);
-        tiles[0][7] = new Rook(0, 7, COLOUR.WHITE);
-        tiles[7][7] = new Rook(7, 7, COLOUR.WHITE);
+        tiles[0][0] = new Rook(0, 7, COLOUR.BLACK, '♜');
+        tiles[7][0] = new Rook(7, 0, COLOUR.BLACK, '♜');
+        tiles[0][7] = new Rook(0, 7, COLOUR.WHITE, '♖');
+        tiles[7][7] = new Rook(7, 7, COLOUR.WHITE, '♖');
 
-        tiles[2][0] = new Bishop(2, 0, COLOUR.BLACK);
-        tiles[5][0] = new Bishop(5, 0, COLOUR.BLACK);
-        tiles[2][7] = new Bishop(2, 7, COLOUR.WHITE);
-        tiles[5][7] = new Bishop(5, 7, COLOUR.WHITE);
+        tiles[2][0] = new Bishop(2, 0, COLOUR.BLACK, '♝');
+        tiles[5][0] = new Bishop(5, 0, COLOUR.BLACK, '♝');
+        tiles[2][7] = new Bishop(2, 7, COLOUR.WHITE, '♗');
+        tiles[5][7] = new Bishop(5, 7, COLOUR.WHITE, '♗');
 
 
-        tiles[1][0] = new Knight(1, 0, COLOUR.BLACK);
-        tiles[6][0] = new Knight(6, 0, COLOUR.BLACK);
-        tiles[1][7] = new Knight(1, 7, COLOUR.WHITE);
-        tiles[6][7] = new Knight(6, 7, COLOUR.WHITE);
+        tiles[1][0] = new Knight(1, 0, COLOUR.BLACK, '♞');
+        tiles[6][0] = new Knight(6, 0, COLOUR.BLACK, '♞');
+        tiles[1][7] = new Knight(1, 7, COLOUR.WHITE, '♘');
+        tiles[6][7] = new Knight(6, 7, COLOUR.WHITE, '♘');
 
-        tiles[4][0] = new King(4, 0, COLOUR.BLACK);
-        tiles[4][7] = new King(4, 7, COLOUR.WHITE);
+        tiles[4][0] = new King(4, 0, COLOUR.BLACK, '♚');
+        tiles[4][7] = new King(4, 7, COLOUR.WHITE, '♔');
 
-        tiles[3][0] = new Queen(3, 0, COLOUR.BLACK);
-        tiles[3][7] = new Queen(3, 7, COLOUR.WHITE);
+        tiles[3][0] = new Queen(3, 0, COLOUR.BLACK, '♛');
+        tiles[3][7] = new Queen(3, 7, COLOUR.WHITE, '♕');
 
         return tiles;
     }
@@ -61,6 +59,8 @@ export default class Board {
     }
 
     draw() {
+        textAlign(CENTER, CENTER);
+        textSize(80);
         rectMode(CENTER);
         for (let i = 0; i < 8; i++) {
             

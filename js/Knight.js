@@ -1,8 +1,8 @@
 import { COLOUR } from './constants.js';
 import Piece from './Piece.js';
 export default class Knight extends Piece {
-    constructor(x, y, colour) {
-        super(x, y, colour);
+    constructor(x, y, colour, sprite) {
+        super(x, y, colour, sprite);
     }
 
 
@@ -35,16 +35,5 @@ export default class Knight extends Piece {
         } else {
             return  {x : newX, y: newY};
         }
-    }
-
-    draw(x, y) {
-        push();
-        push();
-        if (this.colour == COLOUR.BLACK) {
-            text('♞', x, y);
-        } else {
-            text('♘', x, y);
-        }
-        pop();
     }
 }
