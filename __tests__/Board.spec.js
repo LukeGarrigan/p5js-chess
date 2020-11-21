@@ -4,6 +4,7 @@ import { SIZE, COLOUR } from '../js/constants.js';
 import King from '../js/King.js';
 import Pawn from '../js/Pawn.js';
 import Rook from '../js/Rook.js';
+import Queen from '../js/Queen.js';
 
 describe('Creating the tiles', () => {
     let board;
@@ -129,37 +130,5 @@ describe('Moving pieces', () => {
     });
 });
 
-
-describe('Is player in Check', () => {
-    let board;
-
-    beforeEach(() => {
-        board = new Board();
-        board.tiles = board.createEmptyBoard();
-    });
-
-    test('Should retrieve the current king', () => {
-        board.tiles[0][0] = new King(0, 0, COLOUR.WHITE);
-
-        const king = board.getCurrentPlayersKing();
-        expect(king instanceof King);
-        expect(king.x).toBe(0);
-        expect(king.y).toBe(0);
-        expect(king.colour).toBe(COLOUR.WHITE);
-    });
-
-
-
-    test('White should be in check if white pawn can attack', () => {
-        board.turn = COLOUR.BLACK;
-        board.tiles[0][0] = new King(0, 0, COLOUR.BLACK);
-        const pawn = new Pawn(1, 1, COLOUR.WHITE);
-        pawn.hasMoved = true;
-        board.tiles[1][1] = pawn;
-
-        expect(board.isCurrentPlayerInCheck()).toBeTruthy();
-    });
-
-});
 
 

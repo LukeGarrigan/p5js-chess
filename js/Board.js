@@ -5,6 +5,7 @@ import Rook from './Rook.js';
 import Knight from './Knight.js';
 import King from './King.js';
 import Queen from './Queen.js';
+import CheckFinder from './CheckFinder.js';
 
 export default class Board {
 
@@ -131,53 +132,20 @@ export default class Board {
 
     move(from, to) {
         this.turn = this.turn === COLOUR.WHITE ? COLOUR.BLACK : COLOUR.WHITE;
-        this.tiles[to.x][to.y] = this.tiles[from.x][from.y];
-        this.tiles[to.x][to.y].move(to.x, to.y);
-
-        this.tiles[to.x][to.y].x = to.x;
-        this.tiles[to.x][to.y].y = to.y;
-        this.tiles[from.x][from.y] = undefined;
+        this.tiles[from.x][from.y].move(to.x, to.y, this.tiles);
         this.selected = undefined;
 
-        this.isInCheck = this.isCurrentPlayerInCheck();
-    }
+        this.isInCheck = CheckFinder.isCurrentPlayerInCheck(this.tiles, this.turn);
 
-
-    isCurrentPlayerInCheck() {
-
-        const kingPosition = this.getCurrentPlayersKing();        
-        const moves = this.getAllMovesForEnemyPlayer();
-
-        for (let move of moves) {
-            if (move.x == kingPosition.x && move.y == kingPosition.y) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    getCurrentPlayersKing() {
-        for (let i = 0; i < 8; i++) {
-            for (let j = 0; j < 8; j++) { 
-                if (this.tiles[i][j] instanceof King && this.tiles[i][j].colour === this.turn) {
-                    return this.tiles[i][j];
-                }
+        if (this.isInCheck) {
+            let moves = CheckFinder.findMovesForCheckedPlayer(this.tiles, this.turn);
+            if (moves.length === 0) {
+                console.log('Checkmate');
             }
         }
     }
 
-    getAllMovesForEnemyPlayer() {
-        let enemy = this.turn === COLOUR.WHITE ? COLOUR.BLACK : COLOUR.WHITE;
-        let moves = [];
 
-        for (let i = 0; i < 8; i++) {
-            for (let j = 0; j < 8; j++) { 
-                if (this.tiles[i][j] && this.tiles[i][j].colour === enemy) {
-                    moves.push(...this.tiles[i][j].findMoves(this.tiles));
-                }
-            }
-        }
-        return moves;
-    }
+    
 
 }
