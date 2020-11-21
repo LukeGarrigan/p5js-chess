@@ -45,21 +45,27 @@ export default class CheckFinder {
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 8; j++) { 
                 if (tiles[i][j] && tiles[i][j].colour === player) {
-                    const currentPiece = tiles[i][j];
                     const moves = tiles[i][j].findMoves(tiles);
-
                     for (let move of moves) {
-                        const toTile = tiles[move.x][move.y];
-                        currentPiece.move(move.x, move.y, tiles);
-                        if (!this.isCurrentPlayerInCheck(tiles, player)) {
+                        if (this.moveTakesPlayerOutOfCheck(i, j, move.x, move.y, tiles, player)) {
                             legalMoves.push(move);
                         }
-                        tiles[move.x][move.y].move(i, j, tiles); // move back
-                        tiles[move.x][move.y] = toTile;
                     }
                 }
             }
         }
         return legalMoves;
+    }
+
+    static moveTakesPlayerOutOfCheck(fromX, fromY, toX, toY, tiles, player) {
+        const toTile = tiles[toX][toY];
+        tiles[fromX][fromY].move(toX, toY, tiles);
+        let isOutOfCheck = false;
+        if (!this.isCurrentPlayerInCheck(tiles, player)) {
+            isOutOfCheck = true;
+        }
+        tiles[toX][toY].move(fromX, fromY, tiles); // move back
+        tiles[toX][toY] = toTile;
+        return isOutOfCheck;
     }
 }
