@@ -44,7 +44,9 @@ export default class King extends Piece {
 
     getCastleMoves(tiles) {
         let moves = [];
-        if (this.hasMoved || CheckFinder.isCurrentPlayerInCheck(tiles, this.colour)) {
+
+        /* || CheckFinder.isCurrentPlayerInCheck(tiles, this.colour) */
+        if (this.hasMoved) {
             return moves;
         }
 
