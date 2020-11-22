@@ -28,7 +28,7 @@ export default class Piece {
     }
 
 
-    findLegalMoves(tiles, isInCheck) {
+    findLegalMoves(tiles) {
         let moves = this.findMoves(tiles);
         for (let i = moves.length -1; i >= 0; i--) {
             const currentMove = moves[i];

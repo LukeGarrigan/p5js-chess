@@ -96,6 +96,30 @@ describe('Selecting pieces', () => {
         expect(board.selected).toBe(undefined);
     });
 
+    test('Should deselect if clicked off of the board', () => {
+        board.turn = COLOUR.BLACK;
+
+        board.userClick(100, 100);
+
+        // when
+        board.userClick(900, 900);
+
+        // then
+        expect(board.selected).toBe(undefined);
+    });
+
+    test('Should deselect if on another tile that isnt a valid move', () => {
+        board.turn = COLOUR.BLACK;
+
+        board.userClick(100, 100);
+        
+
+        // when
+        board.userClick(300, 300);
+
+        // then
+        expect(board.selected).toBe(undefined);
+    });
     
 });
 

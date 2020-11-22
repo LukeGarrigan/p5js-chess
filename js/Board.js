@@ -24,7 +24,7 @@ export default class Board {
             tiles[i][6] = new Pawn(i, 6, COLOUR.WHITE, '♙');
         }
 
-        tiles[0][0] = new Rook(0, 7, COLOUR.BLACK, '♜');
+        tiles[0][0] = new Rook(0, 0, COLOUR.BLACK, '♜');
         tiles[7][0] = new Rook(7, 0, COLOUR.BLACK, '♜');
         tiles[0][7] = new Rook(0, 7, COLOUR.WHITE, '♖');
         tiles[7][7] = new Rook(7, 7, COLOUR.WHITE, '♖');
@@ -82,8 +82,6 @@ export default class Board {
                     rect(x, y, this.sizeOfSquare, this.sizeOfSquare);
                     pop();
                 }
-                
-
                 if (currentTile)  {
                     currentTile.draw(x, y);
                 }
@@ -96,8 +94,6 @@ export default class Board {
         if (this.selected) {
             const tile = this.tiles[this.selected.x][this.selected.y];
             if (tile) {
-                this.legalMoves = tile.findLegalMoves(this.tiles, this.isInCheck);
-      
                 push();
                 fill(100,255,100, 100);
 
@@ -121,12 +117,17 @@ export default class Board {
     }
 
     select(x, y) {
-        if (this.tiles[x][y] && this.tiles[x][y].colour === this.turn) {
+        if (this.isOffBoard(x, y) ) {
+            this.selected = undefined;
+        } else if (this.tiles[x][y] && this.tiles[x][y].colour === this.turn) {
             this.selected = JSON.parse(JSON.stringify(this.tiles[x][y]));
+            this.legalMoves = this.tiles[this.selected.x][this.selected.y].findLegalMoves(this.tiles);
         } else if (this.selected) {
             const potentialMove = this.legalMoves.find(e => e.x == x && e.y == y);
             if (potentialMove) {
                 this.move(this.selected, potentialMove);
+            } else {
+                this.selected = undefined;
             }
         } 
     }
@@ -144,6 +145,11 @@ export default class Board {
                 console.log('Checkmate');
             }
         }
+    }
+
+
+    isOffBoard(x, y) {
+        return x > 7 || x < 0 || y > 7 || y < 0;
     }
 
 
