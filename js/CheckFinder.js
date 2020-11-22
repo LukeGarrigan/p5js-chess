@@ -57,11 +57,9 @@ export default class CheckFinder {
     }
 
     static moveTakesPlayerOutOfCheck(fromX, fromY, toX, toY, tiles, player) {
-        const toTile = tiles[toX][toY];
-        tiles[fromX][fromY].move(toX, toY, tiles);
-        let inCheck = this.isCurrentPlayerInCheck(tiles, player);
-        tiles[toX][toY].move(fromX, fromY, tiles); // move back
-        tiles[toX][toY] = toTile;
+        const clonedTiles = _.cloneDeep(tiles);
+        clonedTiles[fromX][fromY].move(toX, toY, clonedTiles);
+        let inCheck = this.isCurrentPlayerInCheck(clonedTiles, player);
         return !inCheck;
     }
 }

@@ -3,6 +3,7 @@ import Board from '../js/Board.js';
 import { SIZE, COLOUR } from '../js/constants.js';
 import King from '../js/King.js';
 import Rook from '../js/Rook.js';
+import Bishop from '../js/Bishop.js';
 describe('Find moves on empty board', () => {
     const board = new Board();
     let emptyTiles;
@@ -88,6 +89,140 @@ describe('Find moves on empty board', () => {
         // then
         expect(upRightMoves.length).toBe(3);
     });
+    
+    
+
+    test('Should not find castle moves because king has moved', () => {
+        // given
+        board.turn = COLOUR.BLACK;
+        const king = new King(4, 0, COLOUR.BLACK); 
+        king.hasMoved = true;
+        emptyTiles[4][0] = king;
+        emptyTiles[0][0] = new Rook(0, 0, COLOUR.BLACK);
+
+        // when
+        const moves = king.getCastleMoves(emptyTiles);
+
+        // then
+        expect(moves.length).toBe(0);
+    });
+
+
+    test('Should not find castle moves because rook has moved', () => {
+        // given
+        board.turn = COLOUR.BLACK;
+        const king = new King(4, 0, COLOUR.BLACK); 
+        const rook = new Rook(0, 0, COLOUR.BLACK);
+        rook.hasMoved = true;
+        emptyTiles[4][0] = king;
+        emptyTiles[0][0] = rook;
+
+        // when
+        const moves = king.getCastleMoves(emptyTiles);
+
+        // then
+        expect(moves.length).toBe(0);
+    });
+
+
+    
+    test('Should not find castle if in check', () => {
+        // given
+        board.turn = COLOUR.BLACK;
+        const king = new King(4, 0, COLOUR.BLACK); 
+        const rook = new Rook(0, 0, COLOUR.BLACK);
+        const enemyRook = new Rook(4, 7, COLOUR.WHITE);
+
+        emptyTiles[4][0] = king;
+        emptyTiles[0][0] = rook;
+        emptyTiles[4][7] = enemyRook;
+
+        // when
+        const moves = king.getCastleMoves(emptyTiles);
+
+        // then
+        expect(moves.length).toBe(0);
+    });
+
+    test('Should find one castle move', () => {
+        // given
+        board.turn = COLOUR.BLACK;
+        const king = new King(4, 0, COLOUR.BLACK); 
+        const rook = new Rook(0, 0, COLOUR.BLACK);
+        emptyTiles[4][0] = king;
+        emptyTiles[0][0] = rook;
+
+        // when
+        const moves = king.getCastleMoves(emptyTiles);
+
+        // then
+        expect(moves.length).toBe(1);
+    });
+
+    
+    test('Should find two castle moves', () => {
+        // given
+        board.turn = COLOUR.BLACK;
+        const king = new King(4, 0, COLOUR.BLACK); 
+        const rook = new Rook(0, 0, COLOUR.BLACK);
+        const rook2 = new Rook(7, 0, COLOUR.BLACK);
+        emptyTiles[4][0] = king;
+        emptyTiles[0][0] = rook;
+        emptyTiles[7][0] = rook2;
+
+        // when
+        const moves = king.getCastleMoves(emptyTiles);
+
+        // then
+        expect(moves.length).toBe(2);
+    });
+
+
+
+    test('Should not find a castle move as there is a bishop blocking', () => {
+        // given
+        board.turn = COLOUR.BLACK;
+        const king = new King(4, 0, COLOUR.BLACK); 
+        const rook = new Rook(0, 0, COLOUR.BLACK);
+        const bishop = new Bishop(2, 0, COLOUR.BLACK);
+        emptyTiles[4][0] = king;
+        emptyTiles[0][0] = rook;
+        emptyTiles[2][0] = bishop;
+
+        // when
+        const moves = king.getCastleMoves(emptyTiles);
+
+        // then
+        expect(moves.length).toBe(0);
+    });
+
+
+    test('If move is a long castle, should put the rook the otherside of the King', () => {
+        board.turn = COLOUR.BLACK;
+        const king = new King(4, 0, COLOUR.BLACK); 
+        const rook = new Rook(0, 0, COLOUR.BLACK);
+        emptyTiles[4][0] = king;
+        emptyTiles[0][0] = rook;
+
+        king.move(2, 0, emptyTiles);
+
+        expect(rook.x).toBe(3);
+    });
+
+    test('If move is a short castle, should put the rook the otherside of the King', () => {
+        board.turn = COLOUR.BLACK;
+        const king = new King(4, 0, COLOUR.BLACK); 
+        const rook = new Rook(7, 0, COLOUR.BLACK);
+        emptyTiles[4][0] = king;
+        emptyTiles[7][0] = rook;
+
+        king.move(6, 0, emptyTiles);
+
+        expect(rook.x).toBe(5);
+    });
+
+
+
 });
 
 describe('Find legal moves', () => {
@@ -127,8 +262,10 @@ describe('Find legal moves', () => {
         expect(legalMoves.length).toBe(0);
     });
 
-
 });
+
+
+
 
 
 
