@@ -125,7 +125,7 @@ describe('Find moves on empty board', () => {
     });
 
 
-    /* 
+  
     test('Should not find castle if in check', () => {
         // given
         board.turn = COLOUR.BLACK;
@@ -138,11 +138,11 @@ describe('Find moves on empty board', () => {
         emptyTiles[4][7] = enemyRook;
 
         // when
-        const moves = king.getCastleMoves(emptyTiles);
+        const moves = king.findLegalMoves(emptyTiles);
 
         // then
-        expect(moves.length).toBe(0);
-    }); */
+        expect(moves.length).toBe(4);
+    }); 
 
     test('Should find one castle move', () => {
         // given

@@ -101,4 +101,18 @@ export default class King extends Piece {
     moveIsCastle(toX) {
         return toX == (this.x - 2) || toX == (this.x + 2);
     }
+
+    // special case where castling is not allowed when checked
+    findLegalMoves(tiles) {
+        const legalMoves = super.findLegalMoves(tiles);
+        for (let i = legalMoves.length -1; i >= 0; i--) {
+            const currentMove = legalMoves[i];
+            if (currentMove.x == this.x - 2 || currentMove.x == this.x + 2) {
+                if (CheckFinder.isCurrentPlayerInCheck(tiles, this.colour)) {
+                    legalMoves.splice(i, 1);
+                }
+            } 
+        }
+        return legalMoves;
+    }
 }
