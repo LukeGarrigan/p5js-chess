@@ -1,5 +1,4 @@
 import { COLOUR } from './constants.js';
-import cloneDeep from 'lodash/cloneDeep';
 export default class CheckFinder {
   
     static isCurrentPlayerInCheck(tiles, player) {
@@ -58,7 +57,7 @@ export default class CheckFinder {
     }
 
     static moveTakesPlayerOutOfCheck(fromX, fromY, toX, toY, tiles, player) {
-        const clonedTiles = cloneDeep(tiles);
+        const clonedTiles = _.cloneDeep(tiles);
         clonedTiles[fromX][fromY].move(toX, toY, clonedTiles);
         let inCheck = this.isCurrentPlayerInCheck(clonedTiles, player);
         return !inCheck;
