@@ -1,5 +1,4 @@
 import { COLOUR } from './constants.js';
-import King from './King.js';
 export default class CheckFinder {
   
     static isCurrentPlayerInCheck(tiles, player) {
@@ -18,7 +17,7 @@ export default class CheckFinder {
     static getCurrentPlayersKing(tiles, player) {
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 8; j++) { 
-                if (tiles[i][j] instanceof King && tiles[i][j].colour === player) {
+                if (tiles[i][j] && tiles[i][j].type === 'king' && tiles[i][j].colour === player) { // instanceof causes circular dependency, not happy with this hack
                     return tiles[i][j];
                 }
             }
@@ -60,12 +59,9 @@ export default class CheckFinder {
     static moveTakesPlayerOutOfCheck(fromX, fromY, toX, toY, tiles, player) {
         const toTile = tiles[toX][toY];
         tiles[fromX][fromY].move(toX, toY, tiles);
-        let isOutOfCheck = false;
-        if (!this.isCurrentPlayerInCheck(tiles, player)) {
-            isOutOfCheck = true;
-        }
+        let inCheck = this.isCurrentPlayerInCheck(tiles, player);
         tiles[toX][toY].move(fromX, fromY, tiles); // move back
         tiles[toX][toY] = toTile;
-        return isOutOfCheck;
+        return !inCheck;
     }
 }

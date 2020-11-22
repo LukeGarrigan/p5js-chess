@@ -1,4 +1,5 @@
 
+import CheckFinder from './CheckFinder.js';
 export default class Piece {
     constructor(x, y, colour, sprite) {
         this.x = x;
@@ -8,17 +9,34 @@ export default class Piece {
         this.sprite = sprite;
     }
 
+    userMove(toX, toY, tiles) {
+        this.hasMoved = true;
+        this.move(toX, toY, tiles);
+    }
+    
+
     move(toX, toY, tiles) {
         const fromX = this.x;
         const fromY = this.y;
 
         tiles[toX][toY] = this;
         
-        
         this.x = toX;
         this.y = toY;
-        this.hasMoved = true;
+     
         tiles[fromX][fromY] = undefined; 
+    }
+
+
+    findLegalMoves(tiles, isInCheck) {
+        let moves = this.findMoves(tiles);
+        for (let i = moves.length -1; i >= 0; i--) {
+            const currentMove = moves[i];
+            if (!CheckFinder.moveTakesPlayerOutOfCheck(this.x, this.y, currentMove.x, currentMove.y, tiles, this.colour)) {
+                moves.splice(i, 1);
+            }
+        }
+        return moves;
     }
 
     draw(x, y) {

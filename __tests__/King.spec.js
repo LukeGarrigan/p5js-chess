@@ -88,7 +88,44 @@ describe('Find moves on empty board', () => {
         // then
         expect(upRightMoves.length).toBe(3);
     });
+});
 
+describe('Find legal moves', () => {
+    const board = new Board();
+    let emptyTiles;
+    beforeEach(() => {
+        emptyTiles = board.createEmptyBoard();
+    });
+
+
+    test('Should not be able to move into a checked position so should only find one attacking move on rook', () => {
+        const king = new King(0, 0, COLOUR.WHITE);
+        emptyTiles[0][0] = king;
+
+        const rook = new Rook(1, 1, COLOUR.BLACK);
+        emptyTiles[1][1] = rook;
+
+
+        // when
+        const legalMoves = king.findLegalMoves(emptyTiles);
+        expect(legalMoves.length).toBe(1);
+        expect(legalMoves[0].x).toBe(1);
+        expect(legalMoves[0].y).toBe(1);
+    });
+
+
+    test('Should not be able to move into as both files are occupied by enemy player', () => {
+        const king = new King(0, 0, COLOUR.WHITE);
+        emptyTiles[0][0] = king;
+
+        emptyTiles[1][2] = new Rook(1, 2, COLOUR.BLACK);
+        emptyTiles[0][2] = new Rook(0, 2, COLOUR.BLACK);;
+
+
+        // when
+        const legalMoves = king.findLegalMoves(emptyTiles);
+        expect(legalMoves.length).toBe(0);
+    });
 
 
 });

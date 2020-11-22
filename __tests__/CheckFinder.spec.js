@@ -3,7 +3,6 @@ import Board from '../js/Board.js';
 import { SIZE, COLOUR } from '../js/constants.js';
 import King from '../js/King.js';
 import Pawn from '../js/Pawn.js';
-import Rook from '../js/Rook.js';
 import Queen from '../js/Queen.js';
 import CheckFinder from '../js/CheckFinder.js';
 

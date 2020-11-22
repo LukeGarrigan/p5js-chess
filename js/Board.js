@@ -96,19 +96,8 @@ export default class Board {
         if (this.selected) {
             const tile = this.tiles[this.selected.x][this.selected.y];
             if (tile) {
-                
-
-                this.legalMoves = tile.findMoves(this.tiles);
-
-                if (this.isInCheck) {
-                    for (let i = this.legalMoves.length -1; i >= 0; i--) {
-                        const currentMove = this.legalMoves[i];
-                        if (!CheckFinder.moveTakesPlayerOutOfCheck(this.selected.x, this.selected.y, currentMove.x, currentMove.y, this.tiles, this.turn)) {
-                            this.legalMoves.splice(i, 1);
-                        }
-                    }
-                }
-
+                this.legalMoves = tile.findLegalMoves(this.tiles, this.isInCheck);
+      
                 push();
                 fill(100,255,100, 100);
 
@@ -144,7 +133,7 @@ export default class Board {
 
     move(from, to) {
         this.turn = this.turn === COLOUR.WHITE ? COLOUR.BLACK : COLOUR.WHITE;
-        this.tiles[from.x][from.y].move(to.x, to.y, this.tiles);
+        this.tiles[from.x][from.y].userMove(to.x, to.y, this.tiles);
         this.selected = undefined;
 
         this.isInCheck = CheckFinder.isCurrentPlayerInCheck(this.tiles, this.turn);

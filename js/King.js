@@ -3,6 +3,7 @@ import Piece from './Piece.js';
 export default class King extends Piece {
     constructor(x, y, colour, sprite) {
         super(x, y, colour, sprite);
+        this.type = 'king';
     }
 
 
