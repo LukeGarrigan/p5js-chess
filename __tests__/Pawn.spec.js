@@ -2,6 +2,7 @@
 import Board from '../js/Board.js';
 import { SIZE, COLOUR } from '../js/constants.js';
 import Pawn from '../js/Pawn.js';
+import Queen from '../js/Queen.js';
 
 describe('Finding moves', () => {
     let tiles;
@@ -134,6 +135,37 @@ describe('Finding moves', () => {
 
         // then 
         expect(legalMoves.length).toBe(2);
+    });
+
+
+
+});
+
+
+describe('Should upgrade to a queen if at the edge of the board', () => {
+
+    let tiles;
+    beforeEach(() => {
+        const board = new Board();
+        tiles = board.createEmptyBoard();
+    });
+
+
+    test('Should upgrade white pawn to a queen', () => {
+        // given
+        const pawn = new Pawn(0, 1, COLOUR.WHITE);
+        pawn.move(0, 0, tiles);
+
+        expect(tiles[0][0] instanceof Queen).toBeTruthy();
+    });
+
+
+    test('Should upgrade black pawn to a queen', () => {
+        // given
+        const pawn = new Pawn(0, 6, COLOUR.BLACK);
+        pawn.move(0, 7, tiles);
+
+        expect(tiles[0][7] instanceof Queen).toBeTruthy();
     });
 
 
