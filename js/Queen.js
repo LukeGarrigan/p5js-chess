@@ -25,7 +25,7 @@ export default class Queen extends Piece {
             let newX = this.x + (xDir * i);
             let newY = this.y + (yDir * i);
 
-            if (newX > 7 || newX < 0 || newY > 7 || newY < 0) {
+            if (this.isOffBoard(newX, newY)) {
                 return moves;
             }
 

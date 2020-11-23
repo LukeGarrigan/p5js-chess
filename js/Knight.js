@@ -24,7 +24,7 @@ export default class Knight extends Piece {
     getMove(xDir, yDir, tiles) {
         let newX = this.x + xDir;
         let newY = this.y + yDir; 
-        if (newX > 7 || newX < 0 || newY > 7 || newY < 0) {
+        if (this.isOffBoard(newX, newY)) {
             return;
         }
 

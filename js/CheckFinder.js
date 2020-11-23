@@ -7,7 +7,6 @@ export default class CheckFinder {
 
         for (let move of moves) {
             if (move.x == kingPosition.x && move.y == kingPosition.y) {
-                console.log('Checked');
                 return true;
             }
         }
@@ -39,14 +38,13 @@ export default class CheckFinder {
     }
 
     static findMovesForCheckedPlayer(tiles, player) {
-        
         let legalMoves = [];
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 8; j++) { 
                 if (tiles[i][j] && tiles[i][j].colour === player) {
                     const moves = tiles[i][j].findMoves(tiles);
                     for (let move of moves) {
-                        if (this.moveTakesPlayerOutOfCheck(i, j, move.x, move.y, tiles, player)) {
+                        if (!this.movePutsPlayerInCheck(i, j, move.x, move.y, tiles, player)) {
                             legalMoves.push(move);
                         }
                     }
@@ -56,10 +54,9 @@ export default class CheckFinder {
         return legalMoves;
     }
 
-    static moveTakesPlayerOutOfCheck(fromX, fromY, toX, toY, tiles, player) {
+    static movePutsPlayerInCheck(fromX, fromY, toX, toY, tiles, player) {
         const clonedTiles = _.cloneDeep(tiles);
         clonedTiles[fromX][fromY].move(toX, toY, clonedTiles);
-        let inCheck = this.isCurrentPlayerInCheck(clonedTiles, player);
-        return !inCheck;
+        return this.isCurrentPlayerInCheck(clonedTiles, player);
     }
 }

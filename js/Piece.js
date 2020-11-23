@@ -32,11 +32,15 @@ export default class Piece {
         let moves = this.findMoves(tiles);
         for (let i = moves.length -1; i >= 0; i--) {
             const currentMove = moves[i];
-            if (!CheckFinder.moveTakesPlayerOutOfCheck(this.x, this.y, currentMove.x, currentMove.y, tiles, this.colour)) {
+            if (CheckFinder.movePutsPlayerInCheck(this.x, this.y, currentMove.x, currentMove.y, tiles, this.colour)) {
                 moves.splice(i, 1);
             }
         }
         return moves;
+    }
+
+    isOffBoard(newX, newY) {
+        return newX > 7 || newX < 0 || newY > 7 || newY < 0;
     }
 
     draw(x, y) {

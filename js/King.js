@@ -29,7 +29,7 @@ export default class King extends Piece {
     getMove(xDir, yDir, tiles) {
         let newX = this.x + xDir;
         let newY = this.y + yDir;
-        if (newX > 7 || newX < 0 || newY > 7 || newY < 0) {
+        if (this.isOffBoard(newX, newY)) {
             return;
         }
 
@@ -44,8 +44,6 @@ export default class King extends Piece {
 
     getCastleMoves(tiles) {
         let moves = [];
-
-        /* || CheckFinder.isCurrentPlayerInCheck(tiles, this.colour) */
         if (this.hasMoved) {
             return moves;
         }
