@@ -18,4 +18,4 @@ In the main directory run the following:
 
 
 
-![https://i.imgur.com/bMFUELn.png](https://i.imgur.com/bMFUELn.png)
+![https://i.imgur.com/Zyz9CTK.png](https://i.imgur.com/Zyz9CTK.png)
