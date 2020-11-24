@@ -15,6 +15,11 @@ describe('Player in Check', () => {
         board.tiles = board.createEmptyBoard();
     });
 
+    test('Should not retrieve king as king doesn\'t exist', () => {
+        const king = CheckFinder.getCurrentPlayersKing(board.tiles, COLOUR.WHITE);
+        expect(king).toBe(undefined);
+    });
+
     test('Should retrieve the current king', () => {
         board.tiles[0][0] = new King(0, 0, COLOUR.WHITE);
 

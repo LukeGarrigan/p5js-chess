@@ -152,6 +152,46 @@ describe('Moving pieces', () => {
         board.move(pawnToMove, {x: 0, y: 7});
         expect(board.turn).toBe(COLOUR.BLACK);
     });
+
+    test('Should move king out of check', () => {
+        board.tiles = board.createEmptyBoard();
+
+        const king = new King(0, 0, COLOUR.WHITE, '♔');
+        const blackKing = new King(7, 7, COLOUR.BLACK, '♚');
+        const rook = new Rook(0, 1, COLOUR.BLACK);
+
+        board.tiles[0][0] = king;
+        board.tiles[0][1] = rook;
+        board.tiles[7][7] = blackKing;
+
+        board.move({x: 0, y: 0}, {x: 1, y : 0});
+
+        expect(board.tiles[1][0] instanceof King).toBeTruthy();
+    });
+
+
+    // this test will change when I have a proper ending screen
+    test('Should log when checkmate', () => {
+        // given
+        board.tiles = board.createEmptyBoard();
+        console.log = jest.fn();
+        const blackKing = new King(0, 0, COLOUR.BLACK, '♚');
+        const whiteRook = new Rook(2, 1, COLOUR.WHITE);
+        const whiteRook2 = new Rook(5, 5, COLOUR.WHITE);
+
+        board.tiles[0][0] = blackKing;
+        board.tiles[2][1] = whiteRook;
+        board.tiles[5][5] = whiteRook2;
+
+        // when
+        board.move({x: 5, y: 5}, {x: 5, y: 0});
+
+        // then
+        expect(console.log).toHaveBeenCalledWith('Checkmate');
+    });
+
+
+
 });
 
 
