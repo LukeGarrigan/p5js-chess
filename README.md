@@ -16,6 +16,9 @@
   <a href="https://travis-ci.org/LukeGarrigan/p5js-chess.svg?branch=main">
     <img src="https://travis-ci.org/LukeGarrigan/p5js-chess.svg?branch=main">
   </a>
+  <a href="https://codecov.io/gh/LukeGarrigan/p5js-chess">
+    <img src="https://codecov.io/gh/LukeGarrigan/p5js-chess/branch/main/graph/badge.svg?token=D6GX4VH9QD"/>
+  </a>
 </p>
 
 <h4 align="center">A <a href="https://p5js.org/">p5.js</a> implementation of Chess</h4>
