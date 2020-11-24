@@ -1,7 +1,10 @@
 language: node_js
 node_js:
   - 10
+before_install:
+  - npm install -g codecov
 install:
   - npm install
 script:
-  - npm run test
+  - npm run test-coverage
+  - codecov
