@@ -115,7 +115,7 @@ describe('All directions', () => {
         // then
         expect(moves.length).toBe(13);
     });
-})
+});
 
 
 
