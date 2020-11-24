@@ -6,6 +6,18 @@
   <br>
 </h1>
 
+<p align="center">
+  <a href="https://github.com/lukegarrigan/driver.js/blob/master/license">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" />
+  </a>
+   <a href="https://GitHub.com/LukeGarrigan/p5js-chess/issues/">
+      <img src="https://img.shields.io/github/issues/LukeGarrigan/p5js-chess.svg">
+  </a>
+  <a href="https://travis-ci.org/LukeGarrigan/p5js-chess.svg?branch=main">
+    <img src="https://travis-ci.org/LukeGarrigan/p5js-chess.svg?branch=main">
+  </a>
+</p>
+
 <h4 align="center">A <a href="https://p5js.org/">p5.js</a> implementation of Chess</h4>
 
 ## Get started
