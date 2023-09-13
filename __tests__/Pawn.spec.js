@@ -10,7 +10,8 @@ describe('Finding moves', () => {
         tiles = new Board().tiles;
     });
 
-    test('Should find legal move for black in starting position', () => {
+
+    test('Should find legal move for black as has already moved', () => {
         const pawn = new Pawn(1, 1, COLOUR.BLACK);
         pawn.hasMoved = true;
         const legalMoves = pawn.findMoves(tiles);
